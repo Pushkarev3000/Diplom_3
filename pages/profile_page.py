@@ -1,10 +1,8 @@
 import allure
 from pages.base_page import BasePage
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import TimeoutException
 from locators import *
-from urls import *
+from urls import MAIN_URL, HISTORY_ORDERS_URL, LOGIN_URL
 
 
 @allure.feature("Личный кабинет")
@@ -32,4 +30,4 @@ class ProfilePage(BasePage):
             self.wait_until_clickable(PASSWORD_PH)
         except TimeoutException:
             return False
-        return len(self.driver.find_elements(*LOGOUT_BTN)) > 0
+        return len(self.find_elements_ext(LOGOUT_BTN)) > 0

@@ -21,10 +21,8 @@ class TestFeedPage:
         order_2 = create_new_order()
         feed_page.go_to_history()
         history_texts = feed_page.get_visible_order_numbers()
-        print(f'ЛК ЗАКАЗЫ {history_texts}')
         feed_page.go_to_feed_from_header()
         feed_texts = feed_page.get_visible_order_numbers()
-        print(f'ВСЕ ЗАКАЗЫ {feed_texts}')
         assert history_texts, "История заказов пуста"
         assert all(el in feed_texts for el in history_texts), \
             "В ленте нет заказов из «Истории заказов»"

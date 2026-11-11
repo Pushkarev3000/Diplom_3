@@ -24,18 +24,14 @@ class MainPage(BasePage):
     def add_bun_once(self):
         basket = self._get_basket()
         bun = self.wait.until(EC.visibility_of_element_located(BUN_ITEM))
-        self.driver.execute_script(
-            "arguments[0].scrollIntoView({block: 'center'});", bun
-        )
+        self.scroll_to(bun)
         self.js_drag_and_drop(bun, basket)
 
     @allure.step("Добавляю ингредиент в конструктор")
     def add_ingredient_to_burger(self, locator):
         basket = self._get_basket()
         ingredient = self.wait.until(EC.visibility_of_element_located(locator))
-        self.driver.execute_script(
-            "arguments[0].scrollIntoView({block: 'center'});", ingredient
-        )
+        self.scroll_to(ingredient)
         self.js_drag_and_drop(ingredient, basket)
 
     @allure.step("Читаю счётчик ингредиента")
@@ -60,7 +56,7 @@ class MainPage(BasePage):
     @allure.step("Проверяю закрытие модального окна")
     def modal_is_closed(self):
         """Истина, если модального окна нет в DOM"""
-        return not self.driver.find_elements(*MODAL_WINDOW)
+        return not self.find_elements_ext(MODAL_WINDOW)
 
     @allure.step("Оформляю заказ")
     def place_order(self):

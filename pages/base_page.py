@@ -51,6 +51,25 @@ class BasePage:
     def wait_until_url_contains(self, substring):
         return self.wait.until(lambda d: substring in d.current_url)
 
+    def find_elements_ext(self, locator):
+        """Ждать появления хотя бы одного элемента и вернуть список всех"""
+        # self.wait.until(EC.visibility_of_element_located(locator))
+        return self.driver.find_elements(*locator)
+
+    def wait_ext(self, driver):
+        return self.driver.implicitly_wait(10)
+
+    def long_wait(self):
+        return WebDriverWait(self.driver, 15)
+
+    
+    def scroll_to(self, element):
+        """Прокрутить страницу к элементу"""
+        self.driver.execute_script(
+            "arguments[0].scrollIntoView({block: 'center'});", element
+        )
+        return element
+
     def js_drag_and_drop(self, source, target):
         """Эмуляция HTML5 drag-and-drop — работает в Firefox и Chrome."""
         self.driver.execute_script(

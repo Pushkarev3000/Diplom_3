@@ -1,4 +1,3 @@
-from selenium.webdriver.support import expected_conditions as EC
 from pages.base_page import BasePage
 from locators import *
 from urls import *
@@ -28,7 +27,7 @@ class RecoveryPage(BasePage):
 
     def get_password_border_colors(self):
         """Список цветов рамок полей пароля"""
-        fields = self.driver.find_elements(*INPUT_NEW_PASS)
+        fields = self.find_elements_ext(INPUT_NEW_PASS)
         return [el.value_of_css_property("border-color") for el in fields]
 
     def wait_active_password_border(self, color="rgb(76, 76, 255)"):
